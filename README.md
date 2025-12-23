@@ -52,8 +52,8 @@ Retinal-Disease-Classifier/
 ## Key Findings
 
 - Transfer learning with frozen ResNet50 features provided strong baseline performance
-- Severe class imbalance (some diseases with only 1-6 examples) limits performance on rare conditions
-- Model performs well on common diseases (DR, MYA) but struggles with rare diseases
+- Severe class imbalance (some diseases with only 1-6 examples) limited performance on rare conditions
+- Model performed well on common diseases (DR, MYA) but struggled with rare diseases
 - No overfitting observed - training and validation metrics closely aligned
 
 ## Requirements
