@@ -45,7 +45,7 @@ def predict_disease():
     filepath = os.path.join(UPLOAD_FOLDER, filename)
     file.save(filepath)
     
-    results = predict(filepath, model, disease_names, top_k=5)
+    results = predict(filepath, model, disease_names, top_k=3)
     
     os.remove(filepath)
     
