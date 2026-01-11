@@ -29,11 +29,6 @@
         </div>
     </div>
     
-    <script>
-        document.getElementById('imageInput').addEventListener('change', function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Choose File';
-            document.getElementById('fileName').textContent = fileName;
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
