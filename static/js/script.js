@@ -38,5 +38,30 @@ function uploadImage() {
 };
 
 function displayResults() {
+    document.getElementById('loading').classList.add('hidden');
+
+    // Show image preview
+    const imagePreview = document.getElementById('imagePreview');
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    imagePreview.innerHTML = '';
+    imagePreview.appendChild(img);
+    
+    // Show predictions
+    const predictionsDiv = document.getElementById('predictions');
+    predictionsDiv.innerHTML = '<h3>Top 3 Diseases Identified:</h3>';
+    
+    predictions.forEach((pred, index) => {
+        const predItem = document.createElement('div');
+        predItem.className = 'prediction-item';
+        predItem.innerHTML = `
+            <span class="disease-name">${index + 1}. ${pred.disease}</span>
+            <span class="probability">${pred.percentage}</span>
+        `;
+        predictionsDiv.appendChild(predItem);
+    });
+    
+    // Show results section
+    document.getElementById('results').classList.remove('hidden');
 
 }
