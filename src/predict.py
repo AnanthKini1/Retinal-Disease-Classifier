@@ -1,10 +1,13 @@
 import numpy as np
 from tensorflow import keras
 from PIL import Image
+import os
 
 def load_model():
     """Load the trained model"""
-    model = keras.models.load_model('../models/retinal_disease_classifier.keras')
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(current_dir, '..', 'models', 'retinal_disease_classifier.keras')
+    model = keras.models.load_model(model_path)
     return model
 
 def preprocess_image(image_path):
