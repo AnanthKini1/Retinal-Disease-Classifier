@@ -1,11 +1,10 @@
 // Update file name when file is selected
 document.getElementById("imageInput").addEventListener("change", (e) => {
     const fileName = e.target.files[0] ? e.target.files[0].name : "Choose File";
-    document.getElementById("imageInput").textContent = fileName;
+    document.getElementById("fileName").textContent = fileName;
 });
 
 // Main function to upload and analyze retinal images
-
 function uploadImage() {
     const fileInput = document.getElementById('imageInput');
     const file = fileInput.files[0];
@@ -37,7 +36,7 @@ function uploadImage() {
     });
 };
 
-function displayResults() {
+function displayResults(file, predictions) {
     document.getElementById('loading').classList.add('hidden');
 
     // Show image preview
