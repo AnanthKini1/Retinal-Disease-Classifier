@@ -18,10 +18,10 @@ model = keras.models.load_model(model_path)
 train_labels = pd.read_csv("data/raw/Training_Set/RFMiD_Training_Labels.csv")
 disease_names = train_labels.columns[2:47].tolist()
 
-# Test Route
+# Home Route
 @app.route('/')
 def home():
-    return "Flask is working!"
+    return render_template('index.html')
 
 def allowed_file(filename):
     return '.' in filename and \
