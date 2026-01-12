@@ -5,45 +5,54 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Orbitron', 'Rajdhani', 'Exo 2', sans-serif;
+    background: radial-gradient(circle,rgba(31, 28, 38, 1) 0%, rgba(66, 34, 102, 1) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.container {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 800px;
-    width: 100%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 h1 {
-    color: #333;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 4rem;
     margin-bottom: 10px;
     text-align: center;
+    font-weight: 500;
+    letter-spacing: 3px;
+    padding-bottom: 10px;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 15px;
-    text-decoration: underline;
-}
-
-h3 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-p {
-    color: #666;
+.subtitle {
+    color: rgba(255, 255, 255, 0.6);
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 60px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 60px 40px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    margin: auto;
 }
 
 .upload-section {
@@ -52,27 +61,47 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 
-input[type="file"] {
-    margin: 0 auto 20px auto;
-    padding: 10px;
-    display: block;
-    width: fit-content;
+.file-label {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.file-label:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+#fileName {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgba(100, 100, 255, 0.3);
     color: white;
-    border: none;
-    padding: 15px 40px;
+    border: 2px solid rgba(150, 150, 255, 0.5);
+    padding: 15px 50px;
     font-size: 16px;
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    font-family: 'Orbitron', sans-serif;
 }
 
 button:hover {
+    background: rgba(120, 120, 255, 0.4);
+    border-color: rgba(180, 180, 255, 0.7);
     transform: scale(1.05);
 }
 
@@ -84,29 +113,44 @@ button:hover {
     text-align: center;
     padding: 20px;
     font-size: 18px;
-    color: #667eea;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .results {
     margin-top: 30px;
 }
 
+.results h2 {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
 #imagePreview {
     text-align: center;
     margin-bottom: 20px;
+    padding-bottom: 11px;
 }
 
 #imagePreview img {
     max-width: 400px;
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 #predictions {
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.03);
     padding: 20px;
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#predictions h3 {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .prediction-item {
@@ -115,36 +159,15 @@ button:hover {
     align-items: center;
     padding: 15px;
     margin-bottom: 10px;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .disease-name {
-    font-weight: bold;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .probability {
-    color: #667eea;
-    font-weight: bold;
-}
-
-.file-label {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #f0f0f0;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s;
-}
-
-.file-label:hover {
-    background-color: #e0e0e0;
-}
-
-#fileName {
-    color: #666;
+    color: rgba(255, 255, 255, 0.9);
 }
