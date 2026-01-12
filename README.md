@@ -4,7 +4,7 @@ An AI-powered web application for automated retinal disease detection from fundu
 
 ## 🚀 Live Demo
 
-[Link to deployed app - add after deployment]
+[Link to deployed app - (http://retiscan-production.up.railway.app)]
 
 ## 📋 Overview
 
