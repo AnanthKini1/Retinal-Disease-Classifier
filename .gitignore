@@ -1,22 +1,35 @@
 # Virtual environment
 venv/
+env/
+*.pyc
+__pycache__/
 
-# Data files (can be large)
-data/
+# OS files
+.DS_Store
+Thumbs.db
 
-# Model files (can be very large)
+# Uploaded images (temporary)
+uploads/*
+
+# Model file (too large for GitHub)
+models/*.keras
 models/*.h5
-models/*.pkl
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Environment variables
+.env
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
 
-# Python cache
-__pycache__/
-*.pyc
+# Data files (too large)
+data/raw/
+data/processed/
 
-# OS files
-.DS_Store
-
-# Large files
-*.dylib
+# Results/outputs
+results/*.png
+results/*.pkl
