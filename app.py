@@ -15,8 +15,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Model and label data imports
 model_path = 'models/retinal_disease_classifier.keras'  
 model = keras.models.load_model(model_path)
-train_labels = pd.read_csv("data/raw/Training_Set/RFMiD_Training_Labels.csv")
-disease_names = train_labels.columns[2:47].tolist()
+disease_names = ['DR', 'ARMD', 'MH', 'DN', 'MYA', 'BRVO', 'TSLN', 'ERM', 'LS', 'MS', 'CSR', 'ODC', 'CRVO', 'TV', 'AH', 'ODP', 'ODE', 'ST', 'AION', 'PT', 'RT', 'RS', 'CRS', 'EDN', 'RPEC', 'MHL', 'RP', 'CWS', 'CB', 'ODPM', 'PRH', 'MNF', 'HR', 'CRAO', 'TD', 'CME', 'PTCR', 'CF', 'VH', 'MCA', 'VS', 'BRAO', 'PLQ', 'HPED', 'CL']
 
 # Home Route
 @app.route('/')
