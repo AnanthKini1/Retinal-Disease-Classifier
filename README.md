@@ -1,108 +1,194 @@
-# Retinal Disease Classifier
+# RetiScan
 
-A deep learning project for multi-label classification of retinal diseases from fundus photographs using convolutional neural networks and transfer learning.
+An AI-powered web application for automated retinal disease detection from fundus photographs. Built with deep learning (ResNet50 transfer learning) and deployed with a modern Flask web interface.
 
-## Overview
+## 🚀 Live Demo
 
-This project uses the RFMiD (Retinal Fundus Multi-Disease Image Dataset) to build a CNN-based classifier that can detect up to 45 different retinal conditions from a single fundus image. The model leverages transfer learning with ResNet50 pre-trained on ImageNet.
+[Link to deployed app - add after deployment]
 
-## Dataset
+## 📋 Overview
 
-- **Source**: RFMiD Dataset
+RetiScan uses convolutional neural networks to analyze retinal fundus images and identify potential eye diseases. The system can detect up to 45 different retinal conditions including Diabetic Retinopathy, Macular Degeneration, and other vision-threatening diseases.
+
+**Key Features:**
+- Multi-label disease classification (detects multiple conditions simultaneously)
+- Real-time image analysis through web interface
+- Transfer learning with ResNet50 for accurate predictions
+- Clean, modern UI with instant results
+
+## 🎯 Dataset
+
+- **Source**: RFMiD (Retinal Fundus Multi-Disease Image Dataset)
 - **Training Images**: 1,920 retinal fundus photographs
-- **Diseases**: 45 different retinal conditions including Diabetic Retinopathy (DR), Age-related Macular Degeneration (ARMD), Macular Hole (MH), and others
-- **Format**: Multi-label classification (images can have multiple diseases simultaneously)
+- **Disease Categories**: 45 different retinal conditions
+- **Challenge**: Severe class imbalance (some diseases with only 1-6 examples)
 
-## Project Structure
+## 🏗️ Project Structure
 ```
-Retinal-Disease-Classifier/
-├── data/
-│   ├── raw/                    # Original dataset
-│   └── processed/              # Preprocessed numpy arrays
+RetiScan/
+├── app.py                      # Flask application
+├── src/
+│   └── predict.py              # Prediction logic
+├── templates/
+│   └── index.html              # Web interface
+├── static/
+│   ├── css/
+│   │   └── styles.css          # Styling
+│   └── js/
+│       └── script.js           # Frontend logic
 ├── notebooks/
 │   ├── 01_data_exploration.ipynb
 │   ├── 02_data_preprocessing.ipynb
 │   ├── 03_model_training.ipynb
 │   └── 04_model_evaluation.ipynb
-├── models/                     # Saved trained models
-├── results/                    # Training plots and evaluation results
-└── README.md
+├── models/                     # Trained model (excluded from repo)
+├── results/                    # Training visualizations
+└── requirements.txt
 ```
 
-## Technical Details
+## 🧠 Model Architecture
 
-**Model Architecture:**
-- Base: ResNet50 (pre-trained on ImageNet, frozen)
-- Custom layers: Global Average Pooling → Dense(256, ReLU) → Dropout(0.5) → Dense(45, Sigmoid)
-- Total parameters: ~24M (536K trainable)
+**Base Model:** ResNet50 (pre-trained on ImageNet, frozen)
 
-**Training:**
-- Input size: 512×512×3 RGB images
-- Optimizer: Adam (learning_rate=0.001)
+**Custom Layers:**
+```
+ResNet50 (frozen) 
+→ Global Average Pooling 
+→ Dense(256, ReLU) 
+→ Dropout(0.5) 
+→ Dense(45, Sigmoid)
+```
+
+**Parameters:**
+- Total: ~24M parameters
+- Trainable: 536K parameters (2%)
+- Input: 512×512×3 RGB images
+
+## 📊 Performance
+
+- **Validation AUC**: 0.87 (macro-average during training)
+- **Average per-disease AUC**: 0.58
+- **Top performing diseases**: 
+  - Optociliary Shunt (ST): 0.97 AUC
+  - Myopia (MYA): 0.81 AUC
+  - Tilted Disc (TD): 0.78 AUC
+
+**Note:** Performance varies significantly across diseases due to class imbalance. Common diseases (DR, MYA, ODC) show strong performance, while rare diseases with few training examples are less reliable.
+
+## 🛠️ Tech Stack
+
+**Backend:**
+- Python 3.12
+- Flask (web framework)
+- TensorFlow/Keras (deep learning)
+- NumPy, Pandas (data processing)
+
+**Frontend:**
+- HTML5, CSS3, JavaScript
+- Responsive design
+- Futuristic UI with animated background
+
+**ML Pipeline:**
+- scikit-learn (train/val splitting, metrics)
+- PIL/Pillow (image processing)
+- Transfer learning with ResNet50
+
+## 📦 Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/RetiScan.git
+cd RetiScan
+```
+
+2. **Create virtual environment:**
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Download the trained model:**
+[Instructions for downloading model from Google Drive/host]
+
+5. **Run the application:**
+```bash
+python app.py
+```
+
+6. **Open in browser:**
+```
+http://127.0.0.1:5000
+```
+
+## 🎨 Usage
+
+1. Open RetiScan in your browser
+2. Click "Choose File" and select a retinal fundus image
+3. Click "Analyze Image"
+4. View top 3 predicted diseases with confidence percentages
+5. See the uploaded image preview alongside results
+
+## 📈 Training Process
+
+**Data Preprocessing:**
+- Resized images to 512×512 pixels
+- Normalized pixel values to 0-1 range
+- 80/20 train/validation split (1,536/384 images)
+
+**Training Configuration:**
+- Optimizer: Adam (lr=0.001)
 - Loss: Binary cross-entropy
 - Batch size: 32
 - Epochs: 10
-- Train/Val split: 80/20
+- No overfitting observed
 
-**Performance:**
-- Validation AUC: 0.87 (macro-average)
-- Average per-disease AUC: 0.58
-- Best performing diseases: ST (0.97), MYA (0.81), TD (0.78)
+## 🔮 Future Improvements
 
-## Key Findings
+- [ ] Fine-tune ResNet layers for domain-specific features
+- [ ] Implement data augmentation (rotation, zoom, flip)
+- [ ] Add class weighting to handle imbalance
+- [ ] Experiment with EfficientNet/DenseNet architectures
+- [ ] Deploy with confidence intervals/uncertainty estimates
+- [ ] Add explainability features (Grad-CAM visualizations)
 
-- Transfer learning with frozen ResNet50 features provided strong baseline performance
-- Severe class imbalance (some diseases with only 1-6 examples) limited performance on rare conditions
-- Model performed well on common diseases (DR, MYA) but struggled with rare diseases
-- No overfitting observed - training and validation metrics closely aligned
+## ⚠️ Limitations
 
-## Requirements
-```
-tensorflow==2.20.0
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
-pillow
-jupyter
-```
+- Model performance varies by disease prevalence
+- Not validated for clinical use - **for educational purposes only**
+- Rare diseases (<10 training examples) may have unreliable predictions
+- Model trained on specific image quality/format from RFMiD dataset
 
-## Usage
+## 📝 Project Development
 
-1. **Data Exploration**: `notebooks/01_data_exploration.ipynb`
-   - Analyze dataset distribution
-   - Examine multi-label patterns
-   - Study disease co-occurrences
+This project was developed as a learning exercise in:
+- End-to-end machine learning pipeline development
+- Transfer learning for medical imaging
+- Multi-label classification problems
+- Web application development with Flask
+- Handling severe class imbalance
 
-2. **Preprocessing**: `notebooks/02_data_preprocessing.ipynb`
-   - Load and resize images to 512×512
-   - Normalize pixel values (0-1 range)
-   - Create train/validation split
+## 👨‍💻 Author
 
-3. **Training**: `notebooks/03_model_training.ipynb`
-   - Build model with transfer learning
-   - Train on preprocessed data
-   - Save trained model
+**Ananth Kini**
+- Freshman Computer Science Student, UC Irvine
+- [LinkedIn](your-linkedin)
+- [GitHub](your-github)
 
-4. **Evaluation**: `notebooks/04_model_evaluation.ipynb`
-   - Generate predictions on validation set
-   - Calculate per-disease AUC scores
-   - Visualize performance metrics
+## 🙏 Acknowledgments
 
-## Future Improvements
+- **Dataset**: RFMiD (Retinal Fundus Multi-Disease Image Dataset)
+- **Pre-trained Model**: ResNet50 from TensorFlow/Keras
+- **Inspiration**: Addressing the need for accessible retinal disease screening tools
 
-- Fine-tune ResNet layers for better performance
-- Implement data augmentation to address class imbalance
-- Experiment with different architectures (EfficientNet, DenseNet)
-- Optimize per-disease decision thresholds
-- Apply class weighting to improve rare disease detection
+## 📄 License
 
-## Author
+This project is for educational purposes. The RFMiD dataset has its own terms of use.
 
-Ananth Kini
+---
 
-## Acknowledgments
-
-- Dataset: RFMiD (Retinal Fundus Multi-Disease Image Dataset)
-- Pre-trained model: ResNet50 from TensorFlow/Keras
+**Disclaimer:** RetiScan is a student project and educational tool. It is NOT intended for medical diagnosis or clinical decision-making. Always consult qualified healthcare professionals for medical advice.
